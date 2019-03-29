@@ -1,0 +1,19 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: my-fqdn-certificate
+  namespace: default
+spec:
+  secretName: my-fqdn-tls
+  acme:
+    config:
+    - dns01:
+        provider: cloud-dns-provider
+      domains:
+      - "my-fqdn"
+  commonName: my-fqdn
+  dnsNames:
+  - "my-fqdn"
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-issuer
